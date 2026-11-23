@@ -2,8 +2,8 @@
 
 | | |
 |---|---|
-| Name | <YOUR NAME> |
-| Register number | <YOUR REGISTER NUMBER> |
+| Name | ARTHI A |
+| Register number | 192525152 |
 | Java version | OpenJDK 21 (any JDK 11+ works) |
 | Database | MySQL 8 (results in this repo were produced on MariaDB 10.11, which is MySQL-compatible) with Connector/J |
 
