@@ -1,6 +1,5 @@
 # CSA09 - Programming in Java - Assignment 4 (CO4): Event-Driven GUI Design
-**Name:** [your name]  **Register Number:** [your register number]  **Java version:** [output of `java -version`]
-**GitHub repo name:** CSA09-<RegisterNumber>-Assignment4 (one folder per task: Task01 ... Task06; commit after each task)
+**Name:** ARTHI A  **Register Number:** 192525152  **Java version:** [output of `java -version`]
 
 ## Compile and run
 ```
