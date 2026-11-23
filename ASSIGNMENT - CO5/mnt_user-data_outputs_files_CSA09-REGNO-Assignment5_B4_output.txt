@@ -1,0 +1,27 @@
+Read 20006 lines: 20000 valid, 6 rejected
+  REJECTED line 3002: expected 7 fields but found 4  -> [P300001,19231999,Short,5]
+  REJECTED line 6003: amount not numeric: 'ABC'  -> [P300002,19231998,BadAmt,5,StopX,2027-03-31,ABC]
+  REJECTED line 9004: empty line  -> []
+  REJECTED line 12005: negative amount  -> [P300003,19231997,NegAmt,5,StopX,2027-03-31,-50.0]
+  REJECTED line 15006: duplicate pass id P200010  -> [P200010,19231996,Duplicate,5,StopX,2027-03-31,3000.0]
+  REJECTED line 17007: route not numeric: 'zz'  -> [P300004,19231995,BadRoute,zz,StopX,2027-03-31,3000.0]
+Loaded 20000 rows in 1314 ms (single transaction, batches of 1000)
+SELECT COUNT(*) = 20000
+
+=== DatabaseMetaData ===
+Product        : MariaDB 10.11.14-MariaDB-0ubuntu0.24.04.1
+Driver         : MariaDB Connector/J 2.7.6
+JDBC version   : 4.2
+URL / User     : jdbc:mariadb://localhost:3306/buspass_test / csa09
+Supports batch : true   Transactions: true
+Tables in database:
+  - bus_pass
+  - users
+Columns of bus_pass:
+  pass_id   VARCHAR  size=10
+  reg_no    VARCHAR  size=12
+  name      VARCHAR  size=60
+  route_no  INT      size=10
+  amount    DOUBLE   size=22
+6 counters x 2000 passes in 565 ms -> rows = 12001 (expected 12000 + 1)
+Same pass id issued by every counter: accepted=1, rejected(duplicate key)=5

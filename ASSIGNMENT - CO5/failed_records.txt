@@ -1,0 +1,6 @@
+line 3002: expected 7 fields but found 4  -> [P300001,19231999,Short,5]
+line 6003: amount not numeric: 'ABC'  -> [P300002,19231998,BadAmt,5,StopX,2027-03-31,ABC]
+line 9004: empty line  -> []
+line 12005: negative amount  -> [P300003,19231997,NegAmt,5,StopX,2027-03-31,-50.0]
+line 15006: duplicate pass id P200010  -> [P200010,19231996,Duplicate,5,StopX,2027-03-31,3000.0]
+line 17007: route not numeric: 'zz'  -> [P300004,19231995,BadRoute,zz,StopX,2027-03-31,3000.0]

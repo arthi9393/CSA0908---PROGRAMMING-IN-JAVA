@@ -1,0 +1,14 @@
+[PASS] T1 find existing (comma in name)  [P1002, 192311002, Meena, K, 7, Guindy, 2027-03-31, 3800.0]
+[PASS] T2 find non-existent id  returned null
+[PASS] T3 list route 12  2 passes on route 12
+[PASS] T4 search continues past damaged lines  P1007 found after 4 bad lines
+[PASS] T5 damaged lines reported  4 reported
+      line 4: expected 7 fields but found 3  -> [P1004,192311004,Kiran]
+      line 5: amount not numeric: 'abc'  -> [P1005,192311005,Latha,7,Adyar,2027-03-31,abc]
+      line 6: empty line  -> []
+      line 7: route not numeric: 'xx'  -> [P1006,192311006,Ravi,xx,Adyar,2027-03-31,100.0]
+[PASS] T6 missing file  null, no exception
+[PASS] T7 list route 7 skips bad lines  P1002, P1007
+[PASS] T8 truncated last line rejected  line 9: expected 7 fields but found 5  -> [P1008,192311008,Dev,7,Gui]
+
+Passed 8, failed 0

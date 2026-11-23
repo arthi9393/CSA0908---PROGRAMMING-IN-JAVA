@@ -1,0 +1,14 @@
+=== B1.3 Line counting: unbuffered vs buffered vs readAllLines ===
+Size     lines        unbuffered ms  buffered ms  readAllLines ms speedup   
+1 MB     24545        226.8          5.4          39.7           42        x
+10 MB    245436       2228.1         6.3          76.2           356       x
+50 MB    1227175      10767.3        18.5         413.7          581       x
+
+=== B1.4 Find-pass growth (worst case: id absent / last record) ===
+records    file scan ms   HashMap build ms HashMap lookup us 
+1000       7.17           3.29             0.092             
+5000       7.28           11.13            0.030             
+10000      7.02           11.66            0.048             
+25000      16.37          54.14            0.007             
+50000      16.73          45.62            0.053             
+100000     41.84          100.68           0.007             

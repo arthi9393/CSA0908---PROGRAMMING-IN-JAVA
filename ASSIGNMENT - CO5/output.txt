@@ -1,0 +1,26 @@
+
+Case: valid login   id=[admin] pwd=[S3cret!]
+   SQL built : SELECT * FROM users WHERE id='admin' AND pwd='S3cret!'
+   UNSAFE accepted? true    SAFE accepted? true
+
+Case: wrong password   id=[admin] pwd=[wrong]
+   SQL built : SELECT * FROM users WHERE id='admin' AND pwd='wrong'
+   UNSAFE accepted? false    SAFE accepted? false
+
+Case: tautology in password   id=[admin] pwd=[' OR '1'='1]
+   SQL built : SELECT * FROM users WHERE id='admin' AND pwd='' OR '1'='1'
+   UNSAFE accepted? true    SAFE accepted? false
+
+Case: comment out the password test   id=[admin' -- ] pwd=[anything]
+   SQL built : SELECT * FROM users WHERE id='admin' -- ' AND pwd='anything'
+   UNSAFE accepted? true    SAFE accepted? false
+
+Case: tautology + MySQL # comment in id   id=[nobody' OR 1=1 #] pwd=[x]
+   SQL built : SELECT * FROM users WHERE id='nobody' OR 1=1 #' AND pwd='x'
+   UNSAFE accepted? true    SAFE accepted? false
+find P2004 -> [P2004, 192311004, Ravi, 5, Adyar, 2027-03-31, 3800.0]
+find P2002 -> null
+Damaged-line report (full scan, P2002 does not exist as a valid record):
+  line 2: expected 7 fields but found 5  -> [P2002,192311002,Meena,7,Guindy]
+  line 3: amount not numeric: 'forty-five'  -> [P2003,192311003,Divya,7,Adyar,2027-03-31,forty-five]
+  line 4: empty line  -> []

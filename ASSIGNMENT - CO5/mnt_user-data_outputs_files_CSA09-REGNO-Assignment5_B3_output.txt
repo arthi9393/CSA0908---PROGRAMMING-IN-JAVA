@@ -1,0 +1,33 @@
+=== B3.1 Correctness: 10 rows with each approach ===
+
+Statement -> rows in table: 10
+
+PreparedStatement -> rows in table: 10
+
+Batch -> rows in table: 10
+
+ResultSetMetaData of SELECT * FROM bus_pass:
+  col 1: pass_id   type=VARCHAR  (12) nullable=NO
+  col 2: reg_no    type=VARCHAR  (12) nullable=NO
+  col 3: name      type=VARCHAR  (12) nullable=NO
+  col 4: route_no  type=INTEGER  (4) nullable=NO
+  col 5: amount    type=DOUBLE   (8) nullable=NO
+P100000 | 1923110000 | Student0 | 1 | 3000
+P100001 | 1923110001 | Student1 | 2 | 3001
+P100002 | 1923110002 | Student2 | 3 | 3002
+
+=== B3.2 Insert time (ms), auto-commit ON ===
+rows      Statement    PreparedStatement    Batch(1000)        Multi-row INSERT(1000)
+1000      242          245                  318                16                    
+10000     1680         1298                 1311               60                    
+100000    13742        13598                13972              383                   
+
+=== B3.3 Batch insert: auto-commit vs single transaction (100,000 rows) ===
+Auto-commit batches : 12566 ms
+Single transaction   : 1420 ms (rows=100000)
+
+--- Forced failure: row 5,500 of 10,000 has amount 'ABC' ---
+Auto-commit  -> failed with java.lang.NumberFormatException: For input string: "ABC"
+Rows left in table after AUTO-COMMIT failure : 5000   (partial, inconsistent)
+Transaction -> failed with java.lang.NumberFormatException: For input string: "ABC"
+Rows left in table after TRANSACTION failure : 0   (all-or-nothing)
