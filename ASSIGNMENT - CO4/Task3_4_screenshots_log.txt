@@ -1,0 +1,8 @@
+wrote Task3_resize_small_560x380.png
+wrote Task3_resize_large_800x600.png
+wrote Task3_resize_min_520x260.png
+wrote Task4_DrawPad_before_clicks.png
+wrote Task4_DrawPad_after_4_clicks.png
+wrote Task4_DrawPad_after_repaint_restore.png
+Image changed after 4 clicks: true
+Dots still present after hide/show repaint (images identical): true

@@ -1,0 +1,5 @@
+wrote Task6_1_main_window_all_events.png
+wrote Task6_2_invalid_input.png
+wrote Task6_3_duplicate_rejected.png
+wrote Task6_4_registration_success.png
+wrote Task6_5_table_refreshed_after_success.png

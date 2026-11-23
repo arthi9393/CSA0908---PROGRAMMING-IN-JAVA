@@ -1,0 +1,15 @@
+PASS  TC1 normal registration accepted
+PASS  TC2 same student, different event accepted
+PASS  TC3 duplicate (same student, same event) rejected
+PASS  TC4 duplicate detected even with lower-case reg no
+PASS  TC5 empty register number rejected
+PASS  TC6 short register number rejected
+PASS  TC7 digits-only name rejected
+PASS  TC8 bad email rejected
+PASS  TC9 no event selected rejected
+PASS  TC10 SQL-injection style input rejected
+PASS  TC11 rejected inputs saved nothing (count still 1 for Hackathon)
+PASS  TC12 filter by event counts only that event
+PASS  TC13 page 1 has 20 rows, page 3 has 5 rows
+PASS  TC14 CSV export writes header + 45 rows
+ALL TESTS PASSED

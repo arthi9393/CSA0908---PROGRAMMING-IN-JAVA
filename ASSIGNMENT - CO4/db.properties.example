@@ -1,0 +1,4 @@
+# Copy to db.properties (same folder as the program). Without db.properties the app starts in demo mode (in-memory data).
+url=jdbc:mysql://localhost:3306/campus_events
+user=root
+password=your_password_here

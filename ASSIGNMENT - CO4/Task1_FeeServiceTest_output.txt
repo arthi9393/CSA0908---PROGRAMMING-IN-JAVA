@@ -1,0 +1,12 @@
+PASS  empty register number rejected
+PASS  empty amount rejected
+PASS  non-numeric amount rejected
+PASS  negative amount rejected
+PASS  zero amount rejected
+PASS  SQL-injection style register number rejected
+PASS  nothing saved after invalid inputs
+PASS  receipt before payment gives friendly error
+PASS  valid payment returns receipt
+PASS  valid payment saved once
+PASS  receipt after payment works
+ALL TESTS PASSED

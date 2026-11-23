@@ -1,0 +1,10 @@
+// Task 4.4 - the same program with @Override and the misspelt method name. Save as DrawPadOverrideError.java and compile:
+import java.awt.*;
+import java.awt.event.*;
+public class DrawPadOverrideError extends Frame {
+    public DrawPadOverrideError() {
+        addMouseListener(new MouseAdapter() {
+            @Override public void mouseclicked(MouseEvent e) { }
+        });
+    }
+}

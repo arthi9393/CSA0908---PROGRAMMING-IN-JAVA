@@ -1,0 +1,6 @@
+Task 5.2 - change effort when the requirement changes (Enter key in amount field + result in a dialog)
+Measured with diff between each base version and its modified version (rename-only lines ignored).
+style (a) frame-implements-ActionListener: 4 lines added, 1 lines removed/changed
+style (b) named-inner-class: 6 lines added, 2 lines removed/changed
+style (c) anonymous-inner-class: 7 lines added, 3 lines removed/changed
+style (d) lambda: 3 lines added, 1 lines removed/changed

@@ -1,0 +1,2 @@
+valid 5000 INR -> '60.00 USD'
+invalid 'abc' + Enter -> 'Invalid amount'

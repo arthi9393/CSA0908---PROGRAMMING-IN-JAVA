@@ -1,0 +1,25 @@
+=== Task 1 alt: dispatch with if-else chain (equals) vs HashMap lookup, worst case (last command) ===
+k=3     if-else chain:      7.9 ns/event   HashMap/own listener:   15.5 ns/event
+k=10    if-else chain:     19.6 ns/event   HashMap/own listener:    3.5 ns/event
+k=100   if-else chain:    220.2 ns/event   HashMap/own listener:    5.3 ns/event
+k=1000  if-else chain:   1904.7 ns/event   HashMap/own listener:    5.8 ns/event
+
+=== Task 2 alt: Map<String,List<Doctor>> lookup (in memory) ===
+map lookup: 31.0 ns per department change (a database round trip is typically 0.5-50 ms)
+
+=== Task 3 alt: layout pass time and container count (8 components) ===
+nested Border+Flow : 14.4 us per layout pass, 3 panels (+1 scroll pane)
+GridBagLayout      : 14.0 us per layout pass, 1 container
+null + setBounds   : 0.2 us per layout pass, 1 container (no resizing logic at all)
+
+=== Task 4 alt: repaint cost, redraw n stored points vs copy one BufferedImage (400x300) ===
+n=100     redraw all points:     0.464 ms/repaint   copy image:   0.018 ms/repaint
+n=10000   redraw all points:    12.076 ms/repaint   copy image:   0.019 ms/repaint
+n=200000  redraw all points:   163.730 ms/repaint   copy image:   0.029 ms/repaint
+memory: 1 Point object ~ 16-24 bytes -> n=200,000 points ~ 4.8 MB;  400x300 int image = 0.48 MB (fixed)
+
+=== Task 6 alt: heap needed to hold all 100,000 table rows vs one page of 20 ===
+100,000 rows : about 18.8 MB
+one page (20): about 0.0000 MB
+(the database load time itself needs your MySQL: see report for how to time it with seed_100k.sql)
+ignore: false

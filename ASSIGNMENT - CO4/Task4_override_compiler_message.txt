@@ -1,0 +1,4 @@
+DrawPadOverrideError.java:7: error: method does not override or implement a method from a supertype
+            @Override public void mouseclicked(MouseEvent e) { }
+            ^
+1 error
