@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="${appName} + ' - Monitoring'">Task Scheduler</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">&#9881;</span>
+    <div><h1 th:text="${appName}">Distributed Task Scheduler</h1><small>Kafka &middot; Redis &middot; PostgreSQL &middot; Worker pool</small></div>
+  </div>
+  <div class="actions">
+    <span id="live" class="live">&#9679; live</span>
+    <button class="btn ghost" id="btnBatch">Submit 100 mixed jobs</button>
+    <button class="btn danger" id="btnPerm">Permanent-failure job</button>
+    <button class="btn primary" id="btnNew">+ Submit New Job</button>
+  </div>
+</header>
+
+<main>
+  <section class="cards" id="cards">
+    <div class="card"><span>Total Jobs</span><b id="c-total">0</b></div>
+    <div class="card pending"><span>Pending</span><b id="c-pending">0</b></div>
+    <div class="card running"><span>Running</span><b id="c-running">0</b></div>
+    <div class="card success"><span>Successful</span><b id="c-success">0</b></div>
+    <div class="card retrying"><span>Retrying</span><b id="c-retrying">0</b></div>
+    <div class="card failed"><span>Failed</span><b id="c-failed">0</b></div>
+  </section>
+
+  <section class="infoline">
+    <span>Workers busy: <b id="i-workers">0/0</b></span>
+    <span>Buffered in worker queue: <b id="i-buffer">0</b></span>
+    <span>Waiting in Redis delayed_jobs: <b id="i-delayed">0</b></span>
+    <span>Processed this minute: <b id="i-cur">0</b></span>
+    <span>Last full minute: <b id="i-last">0</b></span>
+    <span>Retry success rate: <b id="i-retry">n/a</b></span>
+  </section>
+
+  <section class="charts">
+    <div class="panel"><h2>Jobs processed over time (cumulative, last 15 min)</h2><canvas id="ch-time" height="190"></canvas></div>
+    <div class="panel"><h2>Jobs per minute</h2><canvas id="ch-rate" height="190"></canvas></div>
+    <div class="panel"><h2>Success vs failure</h2><canvas id="ch-sf" height="190"></canvas></div>
+    <div class="panel"><h2>Priority distribution</h2><canvas id="ch-prio" height="190"></canvas></div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Jobs</h2>
+      <div class="filters">
+        <select id="f-status"><option value="">All statuses</option><option>PENDING</option><option>RUNNING</option><option>SUCCESS</option><option>RETRYING</option><option>FAILED</option></select>
+        <select id="f-prio"><option value="">All priorities</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option></select>
+        <input id="f-q" type="search" placeholder="Search by Job ID">
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Job ID</th><th>Type</th><th>Priority</th><th>Status</th><th>Attempts</th><th>Created</th><th>Last Updated</th><th></th></tr></thead>
+        <tbody id="jobs-body"><tr><td colspan="8" class="muted">Loading...</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><h2>Dead Letter Queue (jobs.dlq)</h2><span class="muted" id="dlq-count"></span></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Job ID</th><th>Type</th><th>Priority</th><th>Attempts</th><th>Failure reason</th><th>Failed at</th><th></th></tr></thead>
+        <tbody id="dlq-body"><tr><td colspan="7" class="muted">No dead-lettered jobs</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<div class="modal" id="m-submit"><div class="modal-box">
+  <h3>Submit New Job</h3>
+  <label>Job type<select id="s-type"><option>SEND_EMAIL</option><option>GENERATE_INVOICE</option></select></label>
+  <label>Priority<select id="s-prio"><option>HIGH</option><option selected>MEDIUM</option><option>LOW</option></select></label>
+  <label>Scheduling<select id="s-mode"><option value="now">Immediate</option><option value="delay">Delayed</option><option value="cron">Recurring (cron)</option></select></label>
+  <label id="l-delay" class="hide">Delay (seconds)<input id="s-delay" type="number" min="1" value="10"></label>
+  <label id="l-cron" class="hide">Cron (6 fields)<input id="s-cron" value="0/10 * * * * *"></label>
+  <label>Payload (JSON)<textarea id="s-payload" rows="3">{"to":"user@example.com","subject":"Hello"}</textarea></label>
+  <label class="check"><input type="checkbox" id="s-perm"> Always fail (demonstrates retries and the DLQ)</label>
+  <div id="s-msg" class="msg"></div>
+  <div class="modal-actions"><button class="btn ghost" data-close>Cancel</button><button class="btn primary" id="s-go">Submit</button></div>
+</div></div>
+
+<div class="modal" id="m-detail"><div class="modal-box wide">
+  <h3>Job Details</h3>
+  <div id="d-body"></div>
+  <div class="modal-actions"><button class="btn ghost" data-close>Close</button></div>
+</div></div>
+
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>

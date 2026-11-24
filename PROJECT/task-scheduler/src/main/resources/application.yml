@@ -1,0 +1,38 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: task-scheduler
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/scheduler}
+    username: ${DB_USER:scheduler}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      acks: all
+scheduler:
+  worker-pool-size: ${WORKER_POOL_SIZE:4}
+  max-retries: 3
+  retry-base-delay-seconds: 2
+  email-failure-rate: ${EMAIL_FAILURE_RATE:0.3}
+  email-work-ms: ${EMAIL_WORK_MS:800}
+  invoice-work-ms: ${INVOICE_WORK_MS:1200}
+  lock-ttl-ms: 30000
+  poll-ms: ${SCHEDULER_POLL_MS:500}
+  consumer-buffer-limit: 1000
+  consumer-group: task-scheduler-workers
+logging:
+  file:
+    name: ${LOG_FILE:logs/scheduler.log}
+  level:
+    com.capstone.scheduler: INFO
+    org.apache.kafka: WARN

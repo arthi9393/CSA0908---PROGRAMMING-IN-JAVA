@@ -1,0 +1,302 @@
+{
+  "info": {
+    "name": "Distributed Task Scheduler",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Submit immediate job",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/jobs",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "jobs"
+          ],
+          "query": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"SEND_EMAIL\",\n  \"priority\": \"HIGH\",\n  \"payload\": {\n    \"to\": \"user@example.com\",\n    \"subject\": \"Hello\"\n  }\n}"
+        }
+      }
+    },
+    {
+      "name": "Submit delayed job (20s)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/jobs",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "jobs"
+          ],
+          "query": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"GENERATE_INVOICE\",\n  \"priority\": \"MEDIUM\",\n  \"delaySeconds\": 20,\n  \"payload\": {\n    \"invoiceNo\": 1001\n  }\n}"
+        }
+      }
+    },
+    {
+      "name": "Submit recurring job (every 10s)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/jobs",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "jobs"
+          ],
+          "query": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"SEND_EMAIL\",\n  \"priority\": \"LOW\",\n  \"cron\": \"0/10 * * * * *\",\n  \"payload\": {\n    \"to\": \"report@example.com\"\n  }\n}"
+        }
+      }
+    },
+    {
+      "name": "Submit permanently failing job",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/jobs",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "jobs"
+          ],
+          "query": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"SEND_EMAIL\",\n  \"priority\": \"HIGH\",\n  \"permanentFailure\": true,\n  \"payload\": {\n    \"to\": \"nobody@example.com\"\n  }\n}"
+        }
+      }
+    },
+    {
+      "name": "List jobs",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/jobs",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "jobs"
+          ],
+          "query": []
+        }
+      }
+    },
+    {
+      "name": "List FAILED jobs",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/jobs?status=FAILED",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "jobs"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "FAILED"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get job (replace ID)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/jobs/REPLACE_JOB_ID",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "jobs",
+            "REPLACE_JOB_ID"
+          ],
+          "query": []
+        }
+      }
+    },
+    {
+      "name": "Retry dead-lettered job",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/jobs/REPLACE_JOB_ID/retry",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "jobs",
+            "REPLACE_JOB_ID",
+            "retry"
+          ],
+          "query": []
+        }
+      }
+    },
+    {
+      "name": "Stats",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/stats",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "stats"
+          ],
+          "query": []
+        }
+      }
+    },
+    {
+      "name": "Dead letter queue",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/dlq",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "dlq"
+          ],
+          "query": []
+        }
+      }
+    },
+    {
+      "name": "Demo: 100 mixed jobs",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/demo/batch?count=100",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "demo",
+            "batch"
+          ],
+          "query": [
+            {
+              "key": "count",
+              "value": "100"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
